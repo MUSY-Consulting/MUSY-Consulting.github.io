@@ -669,6 +669,15 @@ section {
     .client .grid__item {
         max-width: 50%;
     }
+
+    .card__inner { /* intérieur du composant */
+        padding: 1rem;
+        border-top: #333 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 }
 
 @media screen and (min-width:750px) {
