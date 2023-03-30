@@ -125,7 +125,7 @@ function createObserver2(element) {
   let observer;
 
   const options = {
-    threshold: [0.5]
+    threshold: [0.6]
   };
 
   observer = new IntersectionObserver(handleIntersect2, options);
@@ -157,7 +157,7 @@ waypoints5.forEach(waypoint5 => {
 
 
 
-// Fonction pour afficher le detail d'un client
+// ######## Fonction pour afficher le detail d'un client ########
 function showProjectDetails() {
   const links = document.querySelectorAll('.card__link');
   const modals = document.querySelectorAll('.modal');
@@ -185,3 +185,50 @@ function showProjectDetails() {
 }
 
 showProjectDetails();
+
+
+// ######## Fonction d'affichage avec transition des skills ########
+const observerIntersectionAnimation = () => {
+  //const sections = document.querySelectorAll('section');
+  const skills = document.querySelectorAll('.skills .bar');
+
+  /*sections.forEach((section, index) => {
+    if (index === 0) return;
+    section.style.opacity = "0";
+    section.style.transition = "all 1.6s";
+  });
+
+  let sectionObserver = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        let elem = entry.target;
+        elem.style.opacity = 1;
+      }
+    });
+  });
+
+  sections.forEach(section => {
+    sectionObserver.observe(section);
+  });*/
+
+  skills.forEach((elem, index) => {
+
+    elem.style.width = "0";
+    elem.style.transition = "all 1.6s";
+  });
+
+  let skillsObserver = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        let elem = entry.target;
+        elem.style.width = elem.dataset.width + '%';
+      }
+    });
+  });
+
+  skills.forEach(skill => {
+    skillsObserver.observe(skill);
+  });
+}
+
+observerIntersectionAnimation();
