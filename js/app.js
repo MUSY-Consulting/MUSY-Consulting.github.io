@@ -102,7 +102,7 @@ function createObserver(element) {
   let observer;
 
   const options = {
-    threshold: [0.3]
+    threshold: [0.1]
   };
 
   observer = new IntersectionObserver(handleIntersect, options);
