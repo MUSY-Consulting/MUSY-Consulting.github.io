@@ -781,8 +781,12 @@ footer .socials {
     text-align: center;
 }
 
+footer .socials .icon {
+    margin-left: 0.2rem;
+}
+
 footer .socials li {
-    padding: 0 0.7rem;
+    padding: 0 0.8rem;
 }
 
 footer .socials a {
