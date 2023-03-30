@@ -1,0 +1,883 @@
+/* Base */
+
+:root { /* Mise en place de variables génériques */
+    --color-body:#333;
+    --background-body: #fff;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+/* Balises natives */
+html {
+    font-size: 62.5%; /* On redéfini la taille de la police de base à 10px */
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.6rem; /* correspondra donc à 16px */
+    line-height: 1.6;
+    color:var(--color-body);
+    margin: 0;
+    background: var(--background-body);
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #000;
+    line-height: 1; /* Défini la hauteur entre les textes => font-size x line-height */
+} 
+
+h1 .h1 { /* Permet de styliser la class h1 spécifiquement si besoin */
+    font-size: 3.1rem;
+}
+
+h2 .h2 { /* Permet de styliser la class h2 spécifiquement si besoin */
+    font-size: 2.8rem;
+    text-transform: uppercase;
+}
+
+h3 .h3 { /* Permet de styliser la class h3 spécifiquement si besoin */
+    font-size: 2.1rem;
+}
+
+img {
+    max-width: 100%; /* Permet de caler les images à la largeur maximale du container */
+    height: auto;
+}
+
+li {
+    margin-bottom: 1rem;
+}
+
+.list-unstyled {
+    list-style: none; /* Permet d'enlever les puces des listes */
+    margin: 0;
+    padding: 0;
+
+}
+
+.category {
+    margin: 0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #5b6c78;
+}
+
+.container {
+    padding: 1rem 2rem;
+} 
+
+.d-flex { /* Class spécifique flex */ 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.grid { /* Class spécifique grille */
+    display: flex;
+    flex-wrap: wrap; /* permet d'aller à la ligne si debordement des éléments */
+    justify-content: center; /* Permet de centrer tous les elements par grille */
+}
+
+.grid__item { /* Item de la grille */
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 100%;
+    padding: 1rem;
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(-45px);
+    transition: 1.3s;
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 1.3s;
+}
+
+@media screen and (min-width:750px) {
+    .container {
+        max-width: 1200px; /* on applique la conf jusqu'à 1200 px de large maximum */
+        margin: 0 auto; /* on centre l'element*/
+        padding: 2rem;
+    }
+
+    .navbar {
+        display:flex; /* Les éléments vont se mettre les uns à cotés des autres */
+    }
+}
+/* ############################# */
+
+
+
+/* ####### Section generique ####### */
+section {
+    padding: 5.5rem 0; /* Permet d'avoir un padding par défaut sur toutes les sections */
+}
+
+@media screen and (max-width:749px) {
+    .section-header {
+        text-align: center;
+    }
+}
+
+.section-title {
+    font-size: 3.8rem;
+    margin-top: 0;
+}
+
+.section-header {
+    text-align: center;
+}
+
+@media screen and (min-width:750px) {
+    .section-title {
+        font-size: 4.8rem;
+    }
+}
+/* ############################# */
+
+
+
+/* ####### Header ####### */
+.header {
+    background-color: #fff;
+    border-bottom: 1px solid #EEE;
+    position: sticky; /* permet de garder le header en scrolant */
+    top: 0;
+    z-index: 1;
+}
+
+.header .logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px; /* Permet de modifier l'écartement des lettres */
+}
+
+.header li {
+    display: inline-flex; /* Permet d'afficher en lignes les élements */
+    align-items: center; /* Permet de center verticalement les éléments */
+    padding: 0 .5rem;
+}
+
+.header ul {
+    margin-top: 0.9rem;
+}
+
+
+.header a {
+    color:var(--color-body);
+}
+
+.header .right {
+    display: flex;
+    align-items: center;
+}
+
+.header .container {
+    padding: 0.5rem;
+}
+.header .socials {
+    /*display: flex;*/
+    display: none;
+}
+
+.socials li {
+    margin-bottom: 0;
+}
+
+.socials a {
+    padding: 0 0.2rem;
+}
+
+.socials .icon {
+    height: 18px;
+}
+
+.header__avatar img {
+    /*display: none;*/
+    width: 10rem;
+    max-width: 65%;
+    border-radius: 50%;
+    margin-top: 0.9rem;
+}
+.burger {
+    /* Mise en forme du menu burger */
+    background: none;
+    border: none;
+    width: 3.5rem;
+    height: 3.5rem;
+    cursor: pointer; /* Affichage du pointeur de la sourie */
+    position: relative; /* base de positionnement pour les élements before et after */
+    margin-left: 1rem;
+}
+
+.burger .bar {
+    display: block; /* Affichage d'un element span (en ligne) en mode block */
+    width: 2.2rem;
+    height: 0.3rem;
+    background-color: var(--color-body);
+}
+
+.burger .bar::before, .burger .bar::after {
+    /* création d'un élément fictif avant et aprés le span bar */
+    display: block;
+    content: "";
+    width: 2.2rem;
+    height: 0.3rem;
+    background-color: var(--color-body);
+    position: absolute; /* on sort l'élément du flux */
+}
+
+.burger .bar::before {
+    /* positionnement de l'élément fictif avant le span bar */
+    transform: translateY(-0.8rem);
+}
+
+.burger .bar::after {
+    /* positionnement de l'élément fictif apres le span bar */
+    transform: translateY(0.8rem);
+}
+
+@media screen and (max-width:749px) {
+    nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: fixed;
+        top: 55px;
+        left: 110%;
+        width: 0%;
+        overflow: hidden; /* Permet de masquer l'element */
+        opacity: 0;
+        height: calc(100vh - 55px); /* permet de calculer la taille total de la fenetre moins la taille du header */
+        background: #F5F5F5;
+        transition: all 0.4s ease-out;
+    }
+
+    nav .menu li {
+        display: flex;
+        justify-content: center;
+    }
+
+    nav a {
+        display: block;
+        font-size: 2rem;
+        padding: 2rem;
+        transition: all 0.4s;
+    }
+
+    .show-nav nav {
+        opacity: 1; /* On affiche */
+        width: 100%; /* On prend toute la largeur disponible */
+        left: 0;
+        margin-top: 3.6rem; /* On ajoute une marge en haut pour etre juste en dessous du header */
+        z-index: 2;
+    }
+
+    .show-nav nav li a:hover {
+        transform: scale(1.1);
+        text-decoration: none;
+    }
+
+    .burger .bar::before,
+    .burger .bar::after {
+        transition: all 0.2s ease-out; /* permet de rajouter une transition au niveau du changement de degrés des barres */
+
+    }
+
+    .show-nav .burger .bar {
+        width: 0; /* on enleve la barre du milieu du burger */
+    }
+
+    .show-nav .burger .bar::before {
+        transform: rotate(-45deg); /* rotation de -45 degré la barre du haut du burger */
+    }
+
+    .show-nav .burger .bar::after {
+        transform: rotate(45deg); /* rotation de 45 degré la barre du bas du burger */
+    }
+
+}
+
+@media screen and (min-width:750px) {
+    /* On affiche la navbar sur grand ecran */
+    .navbar {
+        display:flex;
+    }
+
+    /* On cache le menu burger sur grand ecran */
+    .burger {
+        display: none;
+    }
+}
+/* ############################# */
+
+
+
+/* ####### section id="hero" ####### */
+.hero {
+    background-image: url(/img/mur15.jpg);
+    color: #fff;
+    padding: 1rem 0 0 0;
+}
+
+.hero .title {
+    color: inherit; /* Permet d'hériter le parametre de son parent .hero */
+    font-size: 4rem;
+    margin: 0 0 0 0;
+}
+
+.hero p {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.hero__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero__item span {
+    text-transform: uppercase;
+}
+
+.hero__item.left { /* animation pour afficher le texte de gauche à droite durant 1 seconde */
+    animation-duration: 1s;
+    animation-name: slideInleft;
+}
+
+.hero__item.right { /* animation pour afficher le texte de droite à gauche durant 1 seconde */
+    animation-duration: 1s;
+    animation-name: slideInright;
+}
+
+.hero__avatar img {
+    max-width: 380px;
+    border-radius: 50%;
+}
+
+@media screen and (max-width:749px) {
+    .hero__item.left {
+        order: 2;
+    }
+    .hero__item.right {
+        order: 1;
+    }
+}
+
+@media screen and (min-width:750px) {
+    .hero__item {
+        flex: 1 0 50%; /* Permet de placer l'élément au centre de l'espace disponible sans margin */
+        align-items: flex-start; /* Permer d'aligner à gauche */
+        text-align: left;
+    }
+
+    .hero__item.left {
+        align-items: flex-start;
+    }
+
+    .hero .title {
+        font-size: 5rem;
+    }
+
+    .hero__avatar img {
+        max-width: 400px;
+        border-radius: 50%;
+    }
+}
+/* ############################# */
+
+
+
+/* ####### section id="about" ####### */
+
+
+
+@media screen and (min-width:750px) {
+    .about .img { 
+        padding-right: 3rem;
+    }
+
+    .grid__item {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width:749px) {
+    .about  {
+        padding-top: 0.8rem;
+    }
+
+    .about .section-title { /* Reset de la class .section-title */
+        margin-top: 2.8rem;
+    }
+}
+/* ############################# */
+
+
+
+/* ####### section id="services" ####### */
+.services {
+    background-color: #F5F5F5;
+}
+
+.service__icon { /* Mise en forme de l'element de l'icone */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 9rem;
+    height: 9rem;
+    border: 0.2rem solid #5b6c78;
+    border-radius: 50%;
+    
+}
+
+.service__icon svg { /* mise en forme de l'icone svg */
+    height: 3.5rem;
+}
+
+.service__content {
+    flex: 1; /* Permet de corriger les écrasements de zone */
+}
+
+.service h3 {
+    margin-bottom: 0; /* Reset de la marge */
+}
+
+@media screen and (max-width:749px) {
+    .services {
+        text-align: center;
+    }
+
+    .service__icon { 
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width:750px) {
+    .service {
+        display: flex; /* pour passer en grid et afficher l'icone en premiere colonne */
+        /*align-items: center;*/
+    }
+
+    .service__icon { 
+        margin-right: 2rem;
+    }
+}
+/* ############################# */
+
+
+
+/* ####### section id="skills" ####### */
+.skills h4, .skills p {
+    margin: 0 0 0.3rem 0;
+}
+
+.skills li {
+    background-color: #F5F5F5;
+    border-left: 0.3rem solid rgba(91,107,120);
+    padding: 0.9rem 2rem;
+
+}
+
+.skills .progressbar {
+    background: #F5F5F5;
+    color: #fff;
+    margin-bottom: 1rem;
+
+}
+
+.skills .bar {
+    background: #5b6c78;
+    padding: 1rem;
+    margin-bottom: 0.9rem;
+
+}
+
+@media screen and (min-width:750px) {
+
+}
+/* ############################# */
+
+
+
+/* ####### section id="client" ####### */
+.client {
+    background-color: #F5F5F5;
+}
+
+.client .grid__item {
+    max-width: 50%;
+    margin-bottom: 0;
+}
+
+.client-filters .grid__item {
+    /*max-width: 50%;*/
+    display: none;
+    margin-bottom: 0;
+}
+
+.client-filters a {
+    color: var(--color-body);
+    background: #EEE;
+    display: flex;
+    flex: 1; /* Permet de prendre tout l'espace */ 
+    justify-content: center;
+    padding: 1rem;
+}
+
+.client-filters a.active { /* on crée un class "active" qui sera activé en JS */
+    color: #fff;
+    background: #5b6c78;
+    
+}
+
+.card {
+    background: #fff;
+    text-transform: uppercase;
+    position: relative;
+    border: #333 1px solid;
+}
+
+.card__inner { /* intérieur du composant */
+    padding: 2rem;
+    border-top: #333 1px solid;
+    /*background-color: #333;*/
+}
+
+.card__title {
+    margin: 0 0 1rem;
+    font-size: 1.6rem;
+}
+
+
+.card__overlay {
+    background:rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center; /* permet de centrer le "+" */
+    position: absolute; /* position absolute par rapport à son parent .card */
+    top: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+}
+
+.card__overlay a { /* style du "+" */
+    font-size: 4.5rem;
+    color: #fff;
+    flex: 1;
+    display: flex; /* On rend clicable toute la zone */
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.card:hover .card__overlay { /* on affiche l'element overlay au survol de l'element card */
+    opacity: 1;
+    transition: opacity 0.4s ease-in;
+}
+
+
+.modal {
+    visibility: hidden; /* caché */
+    opacity: 0; /* forcée invisible */
+    position: fixed;
+    z-index: 4;
+    transform: scale(0); /* de base invisible et effet de zoom au clic */
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: all 0.5s;
+  }
+  
+  .show.modal { /* au clic */
+    transform: scale(1); /* retransformation à sa taille d'origine */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .modal__content {
+    background-color: #fefefe;
+    height: 100vh; /* toute la hauteur de la page */
+    padding: 5rem 1rem;
+    overflow: auto;
+    text-align: left;
+  }
+  
+  .modal img {
+    margin-bottom: 2rem;
+  }
+  
+  .modal__title {
+    margin: 0 0 2rem;
+  }
+  
+  .modal__close { /* Mise en forme du bouton de fermeture */
+    position: absolute; /* Toujours visible */
+    right: 1rem;
+    top: 1rem;
+    background: none;
+    border: 1px solid #eee;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 3.1rem;
+    color: #666;
+    cursor: pointer;
+  }
+  
+  .modal .grid__item {
+    max-width: 100%;
+    margin-bottom: 0;
+    opacity: 1;
+    transition: all 1s ease;
+  }
+
+
+
+
+@media screen and (max-width:749px) {
+    .client .a {
+        font-size: 1.4rem;
+    }
+
+    .client .grid__item {
+        max-width: 50%;
+    }
+}
+
+@media screen and (min-width:750px) {
+    .client-filters .grid__item {
+        max-width: 25%; /* Affiche 4 items sur la meme ligne sur grand ecran */
+    }
+
+    .modal .grid__item {
+        min-width: 50%;
+    }
+
+}
+/* ############################# */
+
+
+
+/* ####### section id="contact" ####### */
+.contact .grid {
+    margin-top: 2rem;
+}
+
+.contact li {
+    height: auto;
+    display: flex;
+    align-items: center;
+    
+}
+
+.contact .icon {
+    height: 18px;
+    width: 18px;
+    margin-right: 2rem;
+}
+
+.contact a { /* Permet d'aligner les élements du a => icone et texte */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor:default;
+    
+}
+
+
+.form {
+    max-width: 60rem;
+    margin: 1rem auto 0 auto;
+}
+
+.form input, .form textarea { /* Mise en forme du formulaire de contact */
+    display: block; /* affichage en mode block donc à la suite en vertical */
+    width: 100%; /* utilise toute la largeur disponible */
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.form textarea {
+    min-height: 20rem;
+}
+
+.form .btn { /* Bouton Submit */
+    border: none;
+    background: var(--color-body);
+    color: #fff;
+    width: auto;
+    min-width: 16rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+.form .btn:hover { /* curseur au survol du bouton */
+    cursor: pointer;
+    background:#000;
+}
+
+
+@media screen and (min-width:750px) {   
+    .contact ul {
+        margin-top: -1rem;
+
+    }
+
+    .contact a {
+        margin-top: 2rem;
+
+    }
+}
+
+/* ############################# */
+
+
+
+/* ####### section id="footer" ####### */
+footer {
+    background: #000;
+    color: #EEE;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer .grid {
+    align-items: center;
+}
+
+footer .socials {
+    display: flex;
+    justify-content: center; /* permet de centrer les logo social */
+    text-align: center;
+}
+
+footer .socials li {
+    padding: 0 0.7rem;
+}
+
+footer .socials a {
+    color:#fff;
+    border: 1px solid #F5F5F5;
+    border-radius: 50%;
+    padding: 1rem;
+    width: 4.2rem;
+    height: 4.2rem;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s; /* permet de setter la durée de la transition sur le hover*/
+}
+
+footer .socials a:hover {
+    background-color: #fff;
+    color: var(--color-body);
+}
+
+@media screen and (min-width:750px) {
+    footer {
+        text-align: left;
+
+    }
+
+    footer .grid__item {
+        max-width: 33.3333%;
+    }
+}
+/* ############################# */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ####### Animations CSS ####### */
+@keyframes slideInleft {
+    from {
+        transform: translateX(-110%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes slideInright {
+    from {
+        transform: translateX(110%);
+    }
+
+    to {
+        transform: translateX(0%);
+    }
+}
+/* ############################# */
+
+
+
+
+
+/* ####### Composants ####### */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
