@@ -76,28 +76,23 @@ function menuMobile() {
   menuMobile();
 
 
-// ######## Fonction d'affichage avec transition des différentes sections ########
-// Définition des variables
+// ######## Fonction d'affichage au scroll avec transition de l'avatar dans le header ########
 const avatar = document.querySelector('.header__avatar'); // on va chercher l'avatar du header
-const waypoints1 = document.querySelectorAll('.services');
-const waypoints2 = document.querySelectorAll('.skills');
-const waypoints3 = document.querySelectorAll('.client');
-const waypoints4 = document.querySelectorAll('.contact');
-const waypoints5 = document.querySelectorAll('.hero');
+const waypoints = document.querySelectorAll('[data-id]');
 
-// Fonction d'action si intersection des elements => rendre visible
 function handleIntersect(entries, observer) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
-      // Should only fire at ~0.8
       console.log(entry, entry.intersectionRatio);
-      entry.target.classList.add('reveal-visible');
-      avatar.classList.add('reveal-visible');
-    }
-  });
+      avatar.classList.add('animate','show')
+    } else {
+      console.log(entry, entry.intersectionRatio);
+      avatar.classList.remove('animate','show')
+  }
+});
 }
 
-// Fonction d'observation du threshold (% d'affichage de la section)
+// Fonction Observation du threshold (% d'affichage de la section)
 function createObserver(element) {
   let observer;
 
@@ -110,49 +105,8 @@ function createObserver(element) {
   
 }
 
-// Fonction d'action si intersection des elements => rendre invisible
-function handleIntersect2(entries, observer) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      console.log(entry, entry.intersectionRatio);
-      avatar.classList.remove('reveal-visible');
-    }
-  });
-}
-
-// Fonction Observation du threshold (% d'affichage de la seection) pour la gestion de l'avatar
-function createObserver2(element) {
-  let observer;
-
-  const options = {
-    threshold: [0.6]
-  };
-
-  observer = new IntersectionObserver(handleIntersect2, options);
-  observer.observe(element);
-  
-}
-
-// Lancement des fonctions
-waypoints1.forEach(waypoint1 => {
-    createObserver(waypoint1); 
-});
-
-waypoints2.forEach(waypoint2 => {
-    createObserver(waypoint2);
-    
-});
-
-waypoints3.forEach(waypoint3 => {
-    createObserver(waypoint3); 
-});
-
-waypoints4.forEach(waypoint4 => {
-    createObserver(waypoint4); 
-});
-
-waypoints5.forEach(waypoint5 => {
-    createObserver2(waypoint5); 
+waypoints.forEach(waypoint => {
+    createObserver(waypoint); 
 });
 
 
@@ -186,33 +140,29 @@ function showProjectDetails() {
 
 showProjectDetails();
 
+// ######## Fonction d'affichage avec transition des sections ########
+function animateSections() {
+  let sectionIds = document.querySelectorAll('[data-id]'); // Sélectionne toutes les sections avec l'attribut data-id
+
+  sectionIds.forEach(section => {
+    let sectionId = section.getAttribute('data-id');
+    let sectionPosition = document.getElementById(sectionId).getBoundingClientRect().top;
+    let screenPosition = window.innerHeight / 1.3; // La position de l'écran lorsqu'il doit déclencher l'animation
+
+    if (sectionPosition < screenPosition) {
+      section.classList.add('animate', 'show');
+    }
+  });
+}
+
+window.addEventListener('scroll', animateSections);
+
 
 // ######## Fonction d'affichage avec transition des skills ########
 const observerIntersectionAnimation = () => {
-  //const sections = document.querySelectorAll('section');
   const skills = document.querySelectorAll('.skills .bar');
 
-  /*sections.forEach((section, index) => {
-    if (index === 0) return;
-    section.style.opacity = "0";
-    section.style.transition = "all 1.6s";
-  });
-
-  let sectionObserver = new IntersectionObserver(function (entries, observer) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        let elem = entry.target;
-        elem.style.opacity = 1;
-      }
-    });
-  });
-
-  sections.forEach(section => {
-    sectionObserver.observe(section);
-  });*/
-
   skills.forEach((elem, index) => {
-
     elem.style.width = "0";
     elem.style.transition = "all 1.6s";
   });
