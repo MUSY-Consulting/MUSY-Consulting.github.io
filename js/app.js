@@ -78,7 +78,8 @@ function menuMobile() {
 
 // ######## Fonction d'affichage au scroll avec transition de l'avatar dans le header ########
 const avatar = document.querySelector('.header__avatar'); // on va chercher l'avatar du header
-const waypoints = document.querySelectorAll('[data-id]');
+//const waypoints = document.querySelectorAll('[data-id]');
+const waypoints = document.querySelectorAll('[data-id');
 
 function handleIntersect(entries, observer) {
   entries.forEach(function(entry) {
@@ -108,7 +109,6 @@ function createObserver(element) {
 waypoints.forEach(waypoint => {
     createObserver(waypoint); 
 });
-
 
 
 // ######## Fonction pour afficher le detail d'un client ########
