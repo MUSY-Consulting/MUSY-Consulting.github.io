@@ -93,7 +93,9 @@ li {
     flex-grow: 1;
     flex-shrink: 0;
     width: 100%;
+    height: 100%;
     padding: 1rem;
+    /*height: auto;*/
 }
 
 .hide {
@@ -568,6 +570,11 @@ section {
     border: #333 1px solid;
 }
 
+.card__image_logo {
+    max-width: 50% ;
+
+}
+
 .card__inner { /* intérieur du composant */
     padding: 2rem;
     border-top: #333 1px solid;
@@ -686,6 +693,11 @@ section {
         justify-content: center;
         align-items: center;
         text-align: center;
+    }
+
+    .card__image_logo {
+        max-width: 100% ;
+    
     }
 }
 

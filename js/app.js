@@ -84,12 +84,10 @@ function toggleAvatarVisibility() {
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.intersectionRatio > 0.008 ) {
-        //avatar.style.display = 'none'; // Afficher la classe "header__avatar" lorsque la section est visible à 100%
-        avatar.classList.remove('animate','show');
+        avatar.classList.remove('animate','show'); // Masque la classe "header__avatar" lorsque la section hero est visible à + de 0.008
         console.log(entry, entry.intersectionRatio);
       } else {
-        //avatar.style.display = 'none'; // Masquer la classe "header__avatar" lorsque la section n'est plus visible à 100%
-        avatar.classList.add('animate','show');
+        avatar.classList.add('animate','show'); // Affiche la classe "header__avatar" lorsque la section hero est visible à + de 0.008
         console.log(entry, entry.intersectionRatio);
       }
     });
