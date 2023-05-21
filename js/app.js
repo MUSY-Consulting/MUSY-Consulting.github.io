@@ -77,39 +77,29 @@ function menuMobile() {
 
 
 // ######## Fonction d'affichage au scroll avec transition de l'avatar dans le header ########
-const avatar = document.querySelector('.header__avatar'); // on va chercher l'avatar du header
-//const waypoints = document.querySelectorAll('[data-id]');
-const waypoints = document.querySelectorAll('[data-id');
+function toggleAvatarVisibility() {
+  const heroSection = document.getElementById('hero'); // Remplacez 'about' par l'ID de votre section "about"
+  const avatar = document.querySelector('.header__avatar'); // Remplacez '.header__avatar' par le sélecteur de votre classe "header__avatar"
 
-function handleIntersect(entries, observer) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      console.log(entry, entry.intersectionRatio);
-      avatar.classList.add('animate','show')
-    } else {
-      console.log(entry, entry.intersectionRatio);
-      avatar.classList.remove('animate','show')
-  }
-});
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.intersectionRatio > 0.008 ) {
+        //avatar.style.display = 'none'; // Afficher la classe "header__avatar" lorsque la section est visible à 100%
+        avatar.classList.remove('animate','show');
+        console.log(entry, entry.intersectionRatio);
+      } else {
+        //avatar.style.display = 'none'; // Masquer la classe "header__avatar" lorsque la section n'est plus visible à 100%
+        avatar.classList.add('animate','show');
+        console.log(entry, entry.intersectionRatio);
+      }
+    });
+  });
+
+  observer.observe(heroSection);
 }
 
-// Fonction Observation du threshold (% d'affichage de la section)
-function createObserver(element) {
-  let observer;
-
-  const options = {
-    threshold: [0.1]
-  };
-
-  observer = new IntersectionObserver(handleIntersect, options);
-  observer.observe(element);
-  
-}
-
-waypoints.forEach(waypoint => {
-    createObserver(waypoint); 
-});
-
+// Appeler la fonction pour activer l'observation
+toggleAvatarVisibility();
 
 // ######## Fonction pour afficher le detail d'un client ########
 function showProjectDetails() {
